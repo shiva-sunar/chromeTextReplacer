@@ -16,15 +16,63 @@ String.prototype.replaceArray = function(find, replace) {
     return replaceString;
   };
 
+function reverseString(str) {
+  var ascii = /^[ -~\t\n\r]+$/;
+  splitted = str.split(" ")
+  reversed = ""
+  for (let i = 0; i < splitted.length; i++) {
+
+    if (!ascii.test(splitted[i])) {
+      // string has non-ascii characters
+      reversed += splitted[i] + " "
+    } else {
+      word = splitted[i]
+      if (word[word.length - 1] == '.') {
+        reversed += word.slice(0, word.length - 1).split("").reverse().join("") + ". "
+      } else if (word[word.length - 1] == ',') {
+        reversed += word.slice(0, word.length - 1).split("").reverse().join("") + ", "
+      } else if (word[word.length - 1] == '?') {
+        reversed += word.slice(0, word.length - 1).split("").reverse().join("") + "? "
+      } else if (word[word.length - 1] == '!') {
+        reversed += word.slice(0, word.length - 1).split("").reverse().join("") + "! "
+      } else {
+        reversed += word.split("").reverse().join("") + " "
+      }
+    }
+
+  }
+  return reversed
+}
+
+
+function makeVowelLess(str) {
+  splitted = str.split(" ")
+  reversed = ""
+  for (let i = 0; i < splitted.length; i++) {
+    reversed += removeVowelsAfterFirstConsonant(splitted[i])+" "
+  }
+  return reversed
+}
+function removeVowelsAfterFirstConsonant(str) {
+    if(str.length<4){
+        return str
+    }
+  const firstConsonantIndex = str.search(/[^aeiou]/i);
+  return str.slice(0, firstConsonantIndex + 1) + str.slice(firstConsonantIndex + 1).replace(/[aeiou]/gi, "");
+}
+
+
 function replacer() {
-    var elements = document.getElementsByTagName('*');
+    var elements = document.getElementsByTagName('p');
     for (var i = 0; i < elements.length; i++) {
         var element = elements[i];
         for (var j = 0; j < element.childNodes.length; j++) {
             var node = element.childNodes[j];
             if (node.nodeType === 3) {
                 var text = node.nodeValue;
-                var replacedText = text.replaceArray(keys, values)
+                // var replacedText = text.replaceArray(keys, values)
+                var replacedText = reverseString(text)
+                // var replacedText = makeVowelLess(text)
                 if (replacedText !== text) {
                     element.replaceChild(document.createTextNode(replacedText), node);
                 }
