@@ -15,7 +15,7 @@ or anything you like using JS functions
 
 and also it can be used to change the roman script to indic and vice versa...
 
-shiva <--> শিব <--> शिव
+shiva <-> শিব <-> शिव
 
 and many more, just modify the parameter in the contentScript.js file.
 
