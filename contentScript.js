@@ -762,8 +762,6 @@ replaceStart();
 var keys = [] 
 var values = [] 
 
-console.log("Hello From ContentScript");
-console.log(typeof(Sanscript.t("hello, mere dost", 'hk', 'devanagari')))
 
 String.prototype.replaceArray = function(find, replace) {
     var replaceString = this;
@@ -832,7 +830,7 @@ function translateIndic(str) {
       // string has non-ascii characters
 
       word = splitted[i]
-        reversed += Sanscript.t(str, 'devanagari','bengali') + " "
+        reversed +=  Sanscript.t(word, 'devanagari','bengali') + " "+word +" "
     } else {
           reversed += splitted[i] + " "
 
